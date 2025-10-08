@@ -1,9 +1,13 @@
-"use client";
+"use client"; // Client Component to use useState, etc.
 
 import { useState } from "react";
 
 export default function Contact() {
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
   const [status, setStatus] = useState("");
 
   const handleChange = (e) => {
@@ -15,7 +19,7 @@ export default function Contact() {
     setStatus("Sending...");
 
     try {
-      const res = await fetch("http://localhost:5000/api/contact", {
+      const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -35,7 +39,7 @@ export default function Contact() {
 
   return (
     <div className="max-w-lg mx-auto mt-12 p-8 bg-white rounded-lg shadow-md dark:bg-gray-900">
-      <h1 className="text-3xl font-bold mb-6 text-center text-gray-900 dark:text-gray-100">Contact Us</h1>
+      <h1 className="text-3xl font-bold mb-6 text-center text-gray-900 dark:text-gray-100">Cocfbdfbdfvdfvdfntact Us</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <input
           type="text"
@@ -44,7 +48,7 @@ export default function Contact() {
           value={formData.name}
           onChange={handleChange}
           required
-          className="px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
         />
         <input
           type="email"
@@ -53,7 +57,7 @@ export default function Contact() {
           value={formData.email}
           onChange={handleChange}
           required
-          className="px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
         />
         <textarea
           name="message"
@@ -62,13 +66,16 @@ export default function Contact() {
           value={formData.message}
           onChange={handleChange}
           required
-          className="px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
         />
-        <button type="submit" className="bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700">
+        <button
+          type="submit"
+          className="bg-blue-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-700 transition-colors"
+        >
           Send
         </button>
       </form>
-      {status && <p className="mt-4 text-center text-blue-600">{status}</p>}
+      {status && <p className="mt-4 text-center text-blue-600 dark:text-blue-400">{status}</p>}
     </div>
   );
 }
